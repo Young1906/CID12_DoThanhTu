@@ -27,15 +27,17 @@ class Puzzle {
     rand_int = (low, high) => {
         return Math.floor(Math.random() * (high - low))+low;
     }
-
     rand_color = () => {
         /*
             Return 2 color, that is slightly different from each other
         */
         let [r,g,b] = [this.rand_int(0, 255), this.rand_int(0, 255), this.rand_int(0, 255)];
-        let hexStr = `#${r.toString(16)}${g.toString(16)}${b.toString(16)}`
-        let hexAlternate = `#${(Math.floor(.5*r)).toString(16)}${g.toString(16)}${b.toString(16)}`
-        // console.log(hexStr, hexAlternate);
+        
+        // main color
+        let hexStr = `rgb(${r},${g},${b})`
+        
+        // slightly more transparent color
+        let hexAlternate = `rgb(${r},${g},${b},0.8)`    
         return {main: hexStr, alternate: hexAlternate};
     }
 
@@ -44,6 +46,10 @@ class Puzzle {
     color = this.rand_color();
     html;
     answer;
+
+    // store value if the puzzle have been clicked
+    isClicked
+
     constructor(n) {
         let rootDiv = document.createElement("div");
         rootDiv.classList += "app"
@@ -56,7 +62,8 @@ class Puzzle {
                 box = new Box(this.color.alternate);
                 
                 // store answer to attribute anwser
-                this.answer = box.id;
+                this.answer = box.html.id;
+                // console.log(box.html.id);
             }
                 
             else
@@ -64,15 +71,39 @@ class Puzzle {
             rootDiv.appendChild(box.html);
         }
 
+        this.isClicked = false;
+
         rootDiv.addEventListener("click", this.handleClick);
         this.html = rootDiv;
     }
 
     handleClick = (event) => {
-        console.log(event.target.id);
-        console.log(this.answer);
-        if (event.target.id === this.answer)
-            console.log(true);
+        if ( !this.isClicked ) {
+            let d = document.createElement("div");
+            let s = document.createElement("s");
+
+            d.appendChild(s);
+
+            if (event.target.id === this.answer){
+                s.classList.add("correct");
+                s.innerText = "CORRECT";
+                event.target.appendChild(d);
+            } else {
+                s.classList.add("wrong");
+                s.innerText = "WRONG";
+                event.target.appendChild(d);
+            }
+            // after click, no more clicking bro
+            this.isClicked = true;
+
+            // emit event to parent and restart the same
+            setTimeout(() => {
+                console.log("[*] Sending event result ...")
+                let EventResult = new CustomEvent("result", {bubbles:true, detail:{result:s.innerText}});
+                this.html.dispatchEvent(EventResult);    
+            }, 100);
+            
+        }
     }
 
     

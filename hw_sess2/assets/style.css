@@ -11,8 +11,24 @@
 }
 
 .box {
-    width: 300px;
-    height: 300px;
+    display: flex;
+    width: 15vw;
+    height: 15vw;
     border-radius: 10px;
     margin: 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.correct {
+    color: lightgreen;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.wrong {
+    color: red;
+    font-weight: bold;
+    text-decoration: none;
 }

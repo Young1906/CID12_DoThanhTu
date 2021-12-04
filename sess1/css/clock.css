@@ -21,7 +21,11 @@
 
 .btn {
     margin: 2px;
-    width: 100;
+    width: 33%;
+}
+
+#clock_btnDelete{
+    color:red;
 }
 
 .btn_container {

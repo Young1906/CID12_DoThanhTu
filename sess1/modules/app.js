@@ -32,8 +32,8 @@ class App {
 
         this.btnContainer.appendChild(this.btnAdd);
         this.btnContainer.appendChild(this.btnStartAll);
+        this.btnContainer.classList.add("btn_container")
         this.btnContainer.addEventListener("click", this.handleClick);
-
 
         this.clockContainer = document.createElement("div");
         
@@ -50,7 +50,7 @@ class App {
         }
 
         if (e.target.id === "app_btnStart"){
-            console.log("this")
+            
             for (let clock of this.allClocks)
                 clock.startClock();
         }

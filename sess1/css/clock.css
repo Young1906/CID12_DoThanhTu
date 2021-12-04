@@ -7,7 +7,7 @@
 
 .clock {
     width: 100%;
-    margin: 15;
+    margin: 10 0 10 0;
     display: flex;
     align-items: center;
     align-content: center;
@@ -24,7 +24,16 @@
     width: 100;
 }
 
+.btn_container {
+    display: flex;
+    padding: 10px;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 5px;
+    /* border: 1px solid lightblue; */
+}
+
 body {
     display: flex;
-    height: 200px;
+    /* height: 200px; */
 }

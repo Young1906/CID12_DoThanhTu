@@ -55,12 +55,7 @@ class Clock
     handleClick = (event) => {
         // console.log(event.target);
         if (event.target.id == "clock__btnStart"){
-        
-            this.timer = setInterval(
-                this.updateClock, 1000)
-            
-            this.btnStart.disabled = true;
-
+            this.startClock()
         }
 
         if (event.target.id == "clock__btnPause"){

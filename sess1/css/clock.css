@@ -1,5 +1,5 @@
 .root {
-    width: 40%;
+    width: 50%;
     margin: auto;
     padding: 10;
     justify-content: center;
@@ -36,4 +36,11 @@
 body {
     display: flex;
     /* height: 200px; */
+}
+
+.clock_digit {
+    font-size: 18;
+    font-family: "Orbitron";
+    color: red;
+
 }

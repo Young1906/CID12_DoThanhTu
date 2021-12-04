@@ -32,7 +32,7 @@ class App {
 
         // Pause All btn
         this.btnPauseAll = document.createElement("button");
-        this.btnPauseAll.innerText = "Pause All";
+        this.btnPauseAll.innerText = "Stop All";
         this.btnPauseAll.id = "app_btnPause";
         this.btnPauseAll.classList.add("btn");
         this.btnPauseAll.classList.add("btn-primary");
@@ -43,7 +43,23 @@ class App {
         this.btnContainer.classList.add("btn_container")
         this.btnContainer.addEventListener("click", this.handleClick);
 
+        // Clock container
         this.clockContainer = document.createElement("div");
+
+        // Catch delete event
+        this.clockContainer.addEventListener("delete", (e) => {
+            let to_delete_idx;
+            let i = 0;
+            
+            for (let clock of this.allClocks) {
+                if (clock.id === e.detail)
+                    to_delete_idx = i;
+                i++;
+            }
+
+            this.allClocks.splice(to_delete_idx, 1);
+            this.clockContainer.removeChild(this.clockContainer.childNodes[to_delete_idx])
+        })
         
         // adding to conatainer
         this.container.append(this.btnContainer);
@@ -64,10 +80,9 @@ class App {
         }
 
         if (e.target.id === "app_btnPause"){
-            console.log("this");
             
             for (let clock of this.allClocks){
-                clock.pauseClock();
+                clock.stopClock();
             }
                 
         }

@@ -85,10 +85,12 @@ class Clock
     }
 
     startClock = () => {
-        this.timer = setInterval(
-            this.updateClock, 1000)
-        
-        this.btnStart.disabled = true;
+
+        if (this.timer == null){
+            this.timer = setInterval(this.updateClock, 1000)
+            this.btnStart.disabled = true;
+        }
+            
     }
 
     pauseClock = () => {

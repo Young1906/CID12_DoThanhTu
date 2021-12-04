@@ -20,8 +20,9 @@
 }
 
 .btn {
-    margin: 2px;
-    width: 33%;
+    margin: 5px;
+    width: 30%;
+
 }
 
 #clock_btnDelete{
@@ -30,9 +31,9 @@
 
 .btn_container {
     display: flex;
-    padding: 10px;
+    /* padding: 10px; */
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     border-radius: 5px;
     /* border: 1px solid lightblue; */
 }

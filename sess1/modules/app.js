@@ -6,6 +6,7 @@ class App {
     btnContainer;
     btnAdd;
     btnStartAll;
+    btnPauseAll;
 
     allClocks = [];
 
@@ -29,9 +30,16 @@ class App {
         this.btnStartAll.classList.add("btn");
         this.btnStartAll.classList.add("btn-primary");
 
+        // Pause All btn
+        this.btnPauseAll = document.createElement("button");
+        this.btnPauseAll.innerText = "Pause All";
+        this.btnPauseAll.id = "app_btnPause";
+        this.btnPauseAll.classList.add("btn");
+        this.btnPauseAll.classList.add("btn-primary");
 
         this.btnContainer.appendChild(this.btnAdd);
         this.btnContainer.appendChild(this.btnStartAll);
+        this.btnContainer.appendChild(this.btnPauseAll);
         this.btnContainer.classList.add("btn_container")
         this.btnContainer.addEventListener("click", this.handleClick);
 
@@ -53,6 +61,15 @@ class App {
             
             for (let clock of this.allClocks)
                 clock.startClock();
+        }
+
+        if (e.target.id === "app_btnPause"){
+            console.log("this");
+            
+            for (let clock of this.allClocks){
+                clock.pauseClock();
+            }
+                
         }
     }
 }

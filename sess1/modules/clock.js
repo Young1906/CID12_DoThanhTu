@@ -59,8 +59,7 @@ class Clock
         }
 
         if (event.target.id == "clock__btnPause"){
-            clearInterval(this.timer);
-            this.btnStart.disabled = false;
+            this.pauseClock();
         }
 
         if (event.target.id == "clock__btnStop") {
@@ -76,6 +75,11 @@ class Clock
             this.updateClock, 1000)
         
         this.btnStart.disabled = true;
+    }
+
+    pauseClock = () => {
+        clearInterval(this.timer);
+        this.btnStart.disabled = false;
     }
 
     updateClock = () => {

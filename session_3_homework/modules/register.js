@@ -11,6 +11,8 @@ class Register {
     $feedbackMsg;
     $btnSignup;
 
+    is_valid;
+
     constructor()
     {
         this.$container = document.createElement("div");
@@ -35,12 +37,13 @@ class Register {
         // Submit btn
         this.$btnSignup = document.createElement("button");
         this.$btnSignup.innerText = "Signup";
+        this.$btnSignup.disabled = true;
 
         this.$form.addEventListener("submit", (event) =>{
             this.handleSubmit(event);
         });
 
-        this.$form.addEventListener("change", (event) => {
+        this.$form.addEventListener("focusout", (event) => {
             this.handleValidation(event);
         })
     }
@@ -68,29 +71,38 @@ class Register {
         let password = this.$passwordInputGroup.getInputValue();
         let passwordconfirm = this.$passwordconfirmInputGroup.getInputValue();
 
-        let is_valid = true;
+        this.$displayNameInputGroup.setErrMsg();
+        this.$emailInputGroup.setErrMsg();
+        this.$passwordInputGroup.setErrMsg();
+        this.$passwordconfirmInputGroup.setErrMsg();
+
+        // let is_valid = true;
 
         if ((e.target.name == "display_name") & !display_name ) {
             this.$displayNameInputGroup.setErrMsg("Display name can't be empty.")
-            is_valid = false;
-        }
+            this.is_valid = false;
+        } else 
+            this.is_valid = true
 
         if ((e.target.name == "email") & !email ) {
             this.$emailInputGroup.setErrMsg("Email can't be empty.")
-            is_valid = false;
-        }
+            this.is_valid = false;
+        } else 
+            this.is_valid = true
         
         if ((e.target.name == "password") & password.length < 6){
             this.$passwordInputGroup.setErrMsg("Password must have at least 6 characters");
-            is_valid = false;
-        }
+            this.is_valid = false;
+        } else 
+            this.is_valid = true
 
         if ((e.target.name == "confirm_password") & (passwordconfirm != password) ){
             this.$passwordconfirmInputGroup.setErrMsg("Password not matched.")
-            is_valid = false
-        }
+            this.is_valid = false
+        } else 
+            this.is_valid = true
 
-        if (!is_valid)
+        if (!this.is_valid)
             this.$btnSignup.disabled = true;
         else
             this.$btnSignup.disabled = false;
@@ -105,10 +117,10 @@ class Register {
         e.preventDefault();
         console.log("Handling ...");
 
-        let display_name = this.$displayNameInputGroup.getInputValue();
+        // let display_name = this.$displayNameInputGroup.getInputValue();
         let email = this.$emailInputGroup.getInputValue();
         let password = this.$passwordInputGroup.getInputValue();
-        let passwordconfirm = this.$passwordconfirmInputGroup.getInputValue();
+        // let passwordconfirm = this.$passwordconfirmInputGroup.getInputValue();
 
         // firebase api
         firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -129,6 +141,7 @@ class Register {
             .catch((err)=>{
                 this.$feedbackMsg.innerText  = err.toString();
                 this.$feedbackMsg.classList.add("has_error")
+                this.$container.classList.add("has_error")
                 console.log(err);
             })
 

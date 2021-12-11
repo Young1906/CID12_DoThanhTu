@@ -69,5 +69,6 @@ button:disabled {
 
 .has_error {
     color: indianred;
+    /* border: 1px solid indianred; */
 }
 

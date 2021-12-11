@@ -61,6 +61,7 @@ input {
 .input-group__errmsg{
     font-size: x-small;
     color:lightcoral;
+    padding-top: 5px;
 }
 
 button {

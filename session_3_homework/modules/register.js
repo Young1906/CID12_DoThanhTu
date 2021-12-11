@@ -11,7 +11,10 @@ class Register {
     $feedbackMsg;
     $btnSignup;
 
-    is_valid;
+    is_valid_displayname = false;
+    is_valid_email = false;
+    is_valid_password = false;
+    is_valid_password_confirm = false;
 
     constructor()
     {
@@ -80,32 +83,32 @@ class Register {
 
         if ((e.target.name == "display_name") & !display_name ) {
             this.$displayNameInputGroup.setErrMsg("Display name can't be empty.")
-            this.is_valid = false;
+            this.is_valid_displayname = false;
         } else 
-            this.is_valid = true
+            this.is_valid_displayname = true
 
         if ((e.target.name == "email") & !email ) {
             this.$emailInputGroup.setErrMsg("Email can't be empty.")
-            this.is_valid = false;
+            this.is_valid_email = false;
         } else 
-            this.is_valid = true
+            this.is_valid_email = true
         
         if ((e.target.name == "password") & password.length < 6){
             this.$passwordInputGroup.setErrMsg("Password must have at least 6 characters");
-            this.is_valid = false;
+            this.is_valid_password= false;
         } else 
-            this.is_valid = true
+            this.is_valid_password = true
 
         if ((e.target.name == "confirm_password") & (passwordconfirm != password) ){
             this.$passwordconfirmInputGroup.setErrMsg("Password not matched.")
-            this.is_valid = false
+            this.is_valid_password_confirm = false
         } else 
-            this.is_valid = true
+            this.is_valid_password_confirm = true
 
-        if (!this.is_valid)
-            this.$btnSignup.disabled = true;
-        else
+        if (this.is_valid_email && this.is_valid_password && this.is_valid_password && this.is_valid_password_confirm)
             this.$btnSignup.disabled = false;
+        else
+            this.$btnSignup.disabled = true;
 
 
 

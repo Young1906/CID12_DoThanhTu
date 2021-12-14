@@ -112,7 +112,7 @@ class Login {
             .then(
                 (userCredential) => {
                     console.log("Login success");
-                    this.moveToFeed(userCredential.user);
+                    // this.moveToFeed(userCredential.user);
 
                     this.$container.classList.remove("has_error");
                     this.$feedbackMsg.classList.remove("has_error");

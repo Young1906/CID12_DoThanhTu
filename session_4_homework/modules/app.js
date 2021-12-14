@@ -34,22 +34,25 @@ class App {
         this.$screen.addEventListener("signout", (e)=>{
             this.signOut();
         })
-        
-        // this.$signoutBtn = document.createElement("button");
-        // this.$signoutBtn.innerText = "SignOut";
-    }
 
-    
+        firebase.auth().onAuthStateChanged((user)=>{
+            if (user) {
+                // console.log(user);
+                this.$feed = new Feed(user);
+                this.set_screen(this.$feed);
+            } else {
+                "Logout"
+            }
+        })
+    };
 
     render(){
         // app first screen is login
         this.$screen.appendChild(this.$login_screen.render());
-        // this.$screen.appendChild(this.$feed.render());
-        // document.title = "Login";
         this.$container.appendChild(this.$screen);
-        // this.$container.appendChild(this.$signoutBtn);
 
         return this.$container;
+
     }
 
     clearScreen(){
@@ -68,28 +71,22 @@ class App {
             this.clearScreen();
             this.$screen.appendChild(this.$login_screen.render());
             document.title = "Login"
-        }
-
-        if (e.detail.target == "feed-screen") {
-            this.clearScreen();
-            this.user = e.detail.user;
-
-            this.$feed = new Feed(this.user);
-            this.$screen.appendChild(this.$feed.render());
-            document.title = "Feed";
-        }
-            
+        }            
     };
 
-    signOut(){
-        this.user = null;
+    set_screen(screen){
         this.clearScreen();
-        this.$screen.appendChild(this.$login_screen.render());
+        this.$screen.appendChild(screen.render());
     }
 
+    signOut(){
 
-    
-
+        firebase.auth().signOut()
+            .then(()=>{
+                this.user = null;        
+                this.set_screen(this.$login_screen);
+            })
+        }
 }
 
 export { App }

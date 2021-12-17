@@ -1,0 +1,96 @@
+.app__container{
+    margin:auto
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    min-width: 250px;
+    margin: auto;
+    padding: 20px;border-radius: 10px;
+}
+
+.form-label{
+    display: flex;
+    justify-content: center;
+    font-size: larger;
+    color: #191919;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+label{
+    /* display: flex; */
+    width: 100%;
+    font-size: small;
+    color: #191919;
+    /* color: rgba(0,0,0,.75); */
+}
+
+input {
+    width: 100%;
+    border: transparent;
+    border-bottom: 1px solid #EEE ;
+    outline: transparent;
+    background-color: transparent;
+    color: #191919;
+    font-size: large;
+    font-weight: 100;
+}
+
+
+.input-group__errmsg{
+    font-size: x-small;
+    color:lightcoral;
+    padding-top: 5px;
+}
+
+button {
+    background-color:  #2980b9 ;
+    color: white;
+    border:transparent;
+    border-radius: 5px;
+    padding: 10px 20px 10px 20px;
+}
+
+button:hover{
+    box-shadow: 5px 5px 0px 0px rgba(255, 255, 255, .1);
+}
+
+button:disabled {
+    background-color: gray;
+}
+
+.form__feedbackMsg {
+    font-size: small;
+    color: gray;
+    font-weight: 100;
+    /* color: indianred; */
+}
+
+.has_error {
+    color: indianred;
+    /* font-weight: 100; */
+    /* border: 1px solid indianred; */
+}
+
+.form-group.has_error {
+    border:1px solid indianred;
+}
+
+.form__lnkSignup {
+    color: #406882;
+    
+    font-size: smaller;
+    text-decoration: underline;
+    text-align: center;
+    font-weight:100;
+}
+
+
